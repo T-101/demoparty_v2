@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  demoparty:
+    build: .
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8004"
+    container_name: demoparty
+    volumes:
+      - .:/demoparty
+    ports:
+      - "8004:8004"
