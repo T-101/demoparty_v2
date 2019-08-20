@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Import from Demoparty.net</title>
+</head>
+<body>
+<h2>Import party from demoparty.net</h2>
+<form method="post"> {% csrf_token %}
+    <label for="demopartyslug">Enter party slug</label>
+    <input id="demopartyslug" type="text" name="demopartyslug"/>
+    <button type="submit">Fetch</button>
+</form>
+</body>
+</html>
