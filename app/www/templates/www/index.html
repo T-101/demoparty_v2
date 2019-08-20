@@ -1,0 +1,163 @@
+{% extends 'www/base.html' %}
+{% block content %}
+    {% include 'www/header.html' %}
+
+    <main>
+        <div id='party-content'>
+
+            {% if party %}
+
+                <section id='party-name'>
+                    <h2>{{ party.name }}</h2>
+                    <a href='{% url "www:poc-index-view" party.slug %}'><i class="fa fa-external-link"
+                                                                           aria-hidden="true"></i></a>
+
+                    {% for link in party.external_urls.all %}
+                        <a href='#'><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        <a href='#'><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+                        <a href='#'><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    {% endfor %}
+                </section>
+                <section id='party-info'>
+                    <div id='party-map'>
+                        <!-- <img src='map.jpg' style='max-width:100%;'/> -->
+                        <div id="map" style='height:300px; width:400px;'></div>
+
+                        <script>
+                            // Initialize and add the map
+                            function initMap() {
+                                // The location of Uluru
+                                // var uluru = {lat: -25.344, lng: 131.036};
+                                var uluru = {lat: {{ party.location.latitude }}, lng: {{ party.location.longitude }} };
+                                // The map, centered at Uluru
+                                var map = new google.maps.Map(
+                                    document.getElementById('map'), {zoom: 16, center: uluru});
+                                // The marker, positioned at Uluru
+                                var marker = new google.maps.Marker({position: uluru, map: map});
+                            }
+                        </script>
+                    </div>
+                    <div id='party-info-text'>
+                        <div id='party-info-date'>
+                            <!-- <h4><a href='#'>2017</a>/07/08 - 10.</h4> -->
+                            <h4>{{ party.demo_party_start }} - {{ party.demo_party_end }}</h4>
+                            <a href='#'>Add to calendar <i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        </div>
+                        <div id='party-info-location'>
+                            <p><a href='{{ party.url }}'>{{ party.url }} <i class="fa fa-external-link"
+                                                                            aria-hidden="true"></i></a></p>
+                        </div>
+                        <div id='party-info-location'>
+                            <h5>{{ party.location.name }}</h5>
+                            <p>{{ party.location.address }}</p>
+                            <p>{{ party.postal_code }} {{ party.location.city }}</p>
+                            <p>{{ party.location.country }} <img
+                                    src='http://www.famfamfam.com/lab/icons/flags/icons/gif/de.gif'/></p>
+                        </div>
+                        <div id='party-info-ticket'>
+                            <h5>Entrance fee</h5>
+                            <ul>
+                                <li>Regular ticket: <b>30&euro;</b></li>
+                                <li>Supporter ticket: <b>300&euro;</b></li>
+                            </ul>
+                            <a href='#'>Purchase tickets <i class="fa fa-external-link" aria-hidden="true"></i></a>
+                        </div>
+
+                    </div>
+                </section>
+
+            {% endif %}
+            {% if parties %}
+
+                <section id='party-name'>
+                    Try these:
+                    {% for party in parties %}
+                        <section id='party-info'>
+                            <a href="{% url "www:poc-index-view" party.slug %}">{{ party.name }}</a>
+                        </section>
+                    {% endfor %}
+                </section>
+
+            {% endif %}
+
+            <section id='party-news'>
+                <h3>News</h3>
+                <article>
+                    <h4><a href="#">Bitjam Podcast #215 &ndash; 20 years of Evoke</a></h4>
+                    <time>18th Jun 17</time>
+                    <p>The bitjam podcast gang is doing us the honors and just released <a
+                            href="http://www.bitfellas.org/page.php?100"
+                            title="Bitjam Podcast #215">a new episode</a> full of the best soundtracks of demos released
+                        at
+                        the last 19 Evokes.
+                        The tracks were mixed together by Vincenzo and Bobic and Oni created an awesome animated logo
+                        for
+                        this special
+                        episode.</p>
+                    <p>Go get it as long as it's fresh ...</p>
+                </article>
+                <article>
+                    <h4><a href="#">Bitjam Podcast #215 &ndash; 20 years of Evoke</a></h4>
+                    <time>18th Jun 17</time>
+                    <p>The bitjam podcast gang is doing us the honors and just released <a
+                            href="http://www.bitfellas.org/page.php?100"
+                            title="Bitjam Podcast #215">a new episode</a> full of the best soundtracks of demos released
+                        at
+                        the last 19 Evokes.
+                        The tracks were mixed together by Vincenzo and Bobic and Oni created an awesome animated logo
+                        for
+                        this special
+                        episode.</p>
+                    <p>Go get it as long as it's fresh ...</p>
+                </article>
+            </section>
+        </div>
+        <div id='party-sidebar'>
+            <aside id='party-visitors'>
+                <h3>Attendance</h3>
+                <ul>
+                    <li><a href='#'><img src='http://img.demoparty.net/avatars/73.jpg'/> Nosfe</a></li>
+                    <li><a href='#'><img src='http://img.demoparty.net/avatars/48.jpg'/> Gargaj</a></li>
+                </ul>
+                <button>I'm attending too!</button>
+                <button>I'm thinking about attending!</button>
+            </aside>
+            <aside id='party-bbs'>
+                <h3>Rides</h3>
+                <ul>
+                    <li><a href='#'><img src='http://img.demoparty.net/avatars/73.jpg'/> Nosfe</a> (from Berlin)</li>
+                    <li><a href='#'>Offer a ride</a></li>
+                </ul>
+            </aside>
+            <aside id='party-bbs'>
+                <h3>Discussions</h3>
+                <ul>
+                    <li><a href='#'>Saturday evening demo compo
+                        <small>kieranhj 15.3.17 10:58</small>
+                    </a></li>
+                    <li><a href='#'>Missing link to previous editions
+                        <small>PulkoMandy 2.1.17 17:12</small>
+                    </a></li>
+                    <li><a href='#'>Start new discussion</a></li>
+                </ul>
+            </aside>
+            <aside id='party-previous'>
+                <h3>Previous editions</h3>
+                <ul>
+                    <li><a href='#'>Evoke 2016</a></li>
+                    <li><a href='#'>Evoke 2015</a></li>
+                    <li><a href='#'>Evoke 2014</a></li>
+                </ul>
+            </aside>
+            <aside id='party-related'>
+                <h3>Related events</h3>
+                <ul>
+                    <li><a href='#'>Revision 2017</a></li>
+                    <li><a href='#'>TUM 2017</a></li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+
+    {% include 'www/footer.html' %}
+{% endblock %}
