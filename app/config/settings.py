@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'django_extensions',
     # Here be our apps
     'authentication',
-    'parties'
+    'parties',
+    'www'
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append('devtools')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,3 +131,5 @@ STATIC_URL = '/static/'
 CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST', default=[])
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = env.list('CORS_ALLOW_HEADERS') if DEBUG else []
+
+GOOGLE_MAPS_API_KEY = env('GOOGLE_MAPS_API_KEY')
