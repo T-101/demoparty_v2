@@ -28,7 +28,7 @@ SECRET_KEY = 'm4i1yg0%wztng5)5nid#@*cz+byg_4zqpf2oa5-vv%n8foz^9r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # We are extending the base user model to hold more data
 AUTH_USER_MODEL = 'authentication.DemoPartyUser'
